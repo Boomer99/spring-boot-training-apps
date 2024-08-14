@@ -1,5 +1,6 @@
 package com.neueda.payments.control;
 
+import com.neueda.payments.exceptions.PaymentNotFoundException;
 import com.neueda.payments.model.Payment;
 import com.neueda.payments.service.PaymentsService;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class PaymentsController {
     }
 
     @GetMapping("/{id}")
-    public Payment getPayment(@PathVariable long id) {
+    public Payment getPayment(@PathVariable long id) throws PaymentNotFoundException {
         return paymentsService.getPaymentById(id);
     }
 

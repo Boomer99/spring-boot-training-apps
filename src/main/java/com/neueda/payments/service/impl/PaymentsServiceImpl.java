@@ -1,7 +1,9 @@
-package com.neueda.payments.service;
+package com.neueda.payments.service.impl;
 
+import com.neueda.payments.exceptions.PaymentNotFoundException;
 import com.neueda.payments.model.Payment;
 import com.neueda.payments.repositories.PaymentsRepository;
+import com.neueda.payments.service.PaymentsService;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -21,13 +23,14 @@ public class PaymentsServiceImpl implements PaymentsService {
     }
 
     @Override
-    public List<Payment> getAllByOrderId(String id) {
-        return paymentsRepository.findAllByOrderId(id);
+    public List<Payment> getAllByOrderId(String orderId) {
+        return paymentsRepository.findAllByOrderId(orderId);
     }
 
     @Override
     public Payment getPaymentById(long id) {
-        return paymentsRepository.findById(id).orElse(null);
+        return paymentsRepository.findById(id)
+                .orElseThrow(() => new PaymentNotFoundException() + id);
     }
 
     @Override

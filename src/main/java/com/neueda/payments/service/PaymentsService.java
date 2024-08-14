@@ -8,7 +8,7 @@ public interface PaymentsService {
 
     List<Payment> getAllPayments();
 
-    List<Payment> getAllByOrderId(String id);
+    List<Payment> getAllByOrderId(String orderId);
 
     Payment getPaymentById(long id);
 
