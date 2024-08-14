@@ -8,8 +8,11 @@ public interface PaymentsService {
 
     List<Payment> getAllPayments();
 
+    List<Payment> getAllByOrderId(String id);
+
     Payment getPaymentById(long id);
 
-    Payment save(Payment payment);
+    List<Payment> getPaymentsByCountry(String country);
 
+    Payment save(Payment payment);
 }

@@ -19,7 +19,14 @@ public class PaymentsController {
     }
 
     @GetMapping
-    public List<Payment> getAllPayments() {
+    public List<Payment> getAllPayments(@RequestParam(value = "country", required = false) String country,
+                                        @RequestParam(value = "orderId", required = false) String orderId) {
+        if (country != null) {
+            return paymentsService.getPaymentsByCountry(country);
+        }
+        if (orderId != null) {
+            return paymentsService.getAllByOrderId(orderId);
+        }
         return paymentsService.getAllPayments();
     }
 
@@ -27,4 +34,10 @@ public class PaymentsController {
     public Payment getPayment(@PathVariable long id) {
         return paymentsService.getPaymentById(id);
     }
+
+    @PostMapping
+    public Payment addPayment(@RequestBody Payment payment) {
+        return paymentsService.save(payment);
+    }
+
 }

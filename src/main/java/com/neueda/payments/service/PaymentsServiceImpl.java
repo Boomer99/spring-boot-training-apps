@@ -21,8 +21,18 @@ public class PaymentsServiceImpl implements PaymentsService {
     }
 
     @Override
+    public List<Payment> getAllByOrderId(String id) {
+        return paymentsRepository.findAllByOrderId(id);
+    }
+
+    @Override
     public Payment getPaymentById(long id) {
         return paymentsRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Payment> getPaymentsByCountry(String country) {
+        return paymentsRepository.findAllByCountry(country);
     }
 
     @Override
