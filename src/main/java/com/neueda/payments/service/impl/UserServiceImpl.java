@@ -6,7 +6,6 @@ import com.neueda.payments.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,16 +15,14 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public User getById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Optional<User> getUserById(long id) {
-        return userRepository.findById(id);
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 
     @Override
