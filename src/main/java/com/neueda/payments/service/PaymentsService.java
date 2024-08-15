@@ -16,4 +16,6 @@ public interface PaymentsService {
     Payment save(Payment payment);
 
     List<Payment> getAllByOrderId(String orderId);
+
+    List<String> getDistinctListOfPaymentCountries();
 }

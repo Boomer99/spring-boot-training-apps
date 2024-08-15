@@ -37,6 +37,11 @@ public class PaymentsController {
         return paymentsService.getById(id);
     }
 
+    @GetMapping(value="/country", produces={MediaType.APPLICATION_JSON_VALUE , MediaType.APPLICATION_XML_VALUE})
+    public List<String> getAllPaymentCountries() {
+        return paymentsService.getDistinctListOfPaymentCountries();
+    }
+
     @PostMapping
     public Payment savePayment(@RequestBody Payment payment) {
         return paymentsService.save(payment);

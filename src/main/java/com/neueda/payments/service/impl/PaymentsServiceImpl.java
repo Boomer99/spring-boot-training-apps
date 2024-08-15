@@ -6,9 +6,11 @@ import com.neueda.payments.repositories.PaymentsRepository;
 import com.neueda.payments.service.PaymentsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentsServiceImpl implements PaymentsService {
@@ -43,6 +45,11 @@ public class PaymentsServiceImpl implements PaymentsService {
     @Override
     public List<Payment> getAllByOrderId(String orderId) {
         return paymentsRepository.findAllByOrderId(orderId);
+    }
+
+    @Override
+    public List<String> getDistinctListOfPaymentCountries() {
+        return paymentsRepository.findAll().stream().map(Payment::getCountry).distinct().sorted().toList();
     }
 
 }

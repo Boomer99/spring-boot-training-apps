@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.*;
+import java.util.Objects;
 
 @Entity
 public class Payment {
@@ -114,5 +115,18 @@ public class Payment {
                 ", taxRate=" + taxRate +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return Objects.equals(id, payment.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
