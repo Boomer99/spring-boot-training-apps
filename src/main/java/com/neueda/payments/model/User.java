@@ -1,6 +1,7 @@
 package com.neueda.payments.model;
 
-import com.neueda.payments.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neueda.payments.enums.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,23 +12,17 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     private String name;
-    private Role role;
     private String password;
+    private UserRole role;
 
-    public User(long id, String name, Role role, String password) {
-        this.id = id;
-        this.name = name;
-        this.role = role;
-        this.password = password;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,14 +34,7 @@ public class User {
         this.name = name;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -55,13 +43,20 @@ public class User {
         this.password = password;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", role=" + role +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

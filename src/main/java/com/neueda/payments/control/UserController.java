@@ -1,15 +1,15 @@
 package com.neueda.payments.control;
 
-import com.neueda.payments.model.Payment;
+import com.neueda.payments.dto.UserDTO;
 import com.neueda.payments.model.User;
 import com.neueda.payments.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 @CrossOrigin
 @RequestMapping("/api/user")
-@RestController
 public class UserController {
 
     private UserService userService;
@@ -18,19 +18,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping("/{id}")
+    public UserDTO getUserById(@PathVariable("id") Long id) {
+        return new UserDTO(userService.getById(id));
     }
 
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable long id) throws UserNotFoundException {
-        return userService.getUserById(id);
+    @GetMapping
+    public List<UserDTO> getAllUsers() {
+        return userService.getAll().stream().map(UserDTO::new).toList();
     }
 
     @PostMapping
-    public User addUser(@RequestBody User user) {
-        return userService.save(user);
+    public UserDTO saveUser(User user) {
+        return new UserDTO(userService.save(user));
     }
-
 }
